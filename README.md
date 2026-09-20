@@ -5,49 +5,49 @@
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-Machine%20Learning-FF6A00.svg)](https://scikit-learn.org/)
 [![Git LFS](https://img.shields.io/badge/Git%20LFS-Enabled-8A2BE2.svg)](https://git-lfs.github.com/)
 
-## 📌 Tổng quan dự án
-Dự án thực hiện toàn diện quy trình khai thác dữ liệu (Data Mining) để giải quyết bài toán phát hiện giao dịch gian lận thẻ tín dụng. Trong bối cảnh an toàn thông tin, việc phát hiện gian lận mang bản chất của bài toán **Nhận diện bất thường (Anomaly Detection)**, đòi hỏi hệ thống phải phân biệt được các hành vi tinh vi ẩn giấu giữa hàng nghìn giao dịch hợp lệ.
+## 📌 Project Overview
+This project implements a comprehensive Data Mining pipeline to tackle the credit card fraud detection problem. In the context of cybersecurity, detecting fraud is fundamentally an **Anomaly Detection** task, requiring the system to identify sophisticated malicious behaviors hidden among hundreds of thousands of legitimate transactions.
 
-Thách thức cốt lõi của dự án là xử lý **Dữ liệu mất cân bằng nghiêm trọng (Highly Imbalanced Data)** khi lớp gian lận (Fraud) chỉ chiếm **0.1727%** tổng số giao dịch.
+The core challenge of this project is handling **Highly Imbalanced Data**, where the fraudulent class accounts for only **0.1727%** of the total transactions.
 
-## 📊 Dữ liệu
-*   **Nguồn dữ liệu:** [Kaggle - Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud).
-*   **Kích thước:** 284,807 dòng x 31 cột.
-*   **Phân bổ nhãn (Class):** `0` (Giao dịch hợp lệ - 99.8273%) | `1` (Giao dịch gian lận - 0.1727%).
-*   **Lưu trữ:** Để tối ưu hóa giới hạn băng thông, file dữ liệu gốc đã được nén thành `creditcard.zip` và quản lý trực tiếp trên GitHub thông qua hệ thống **Git LFS (Large File Storage)**.
+## 📊 Dataset
+*   **Data Source:** [Kaggle - Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud).
+*   **Shape:** 284,807 rows x 31 columns.
+*   **Class Distribution:** `0` (Valid Transactions - 99.8273%) | `1` (Fraudulent Transactions - 0.1727%).
+*   **Storage:** To optimize bandwidth limits, the original dataset has been compressed into `creditcard.zip` and is managed directly on GitHub using **Git LFS (Large File Storage)**.
 
-## 🛠️ Phương pháp luận và Công nghệ
-Dự án được triển khai qua 4 giai đoạn phân tích chuyên sâu:
+## 🛠️ Methodology & Technologies
+The project is deployed through 4 in-depth analysis phases:
 
-### 1. Tiền xử lý & Khám phá dữ liệu (EDA)
-* Phân tích tính toàn vẹn, kiểm tra giá trị thiếu và cấu trúc phân bố các biến.
-* Chuẩn hóa dữ liệu bằng `StandardScaler` để đảm bảo độ tin cậy cho các thuật toán tính toán khoảng cách và phương sai.
+### 1. Exploratory Data Analysis (EDA) & Preprocessing
+* Evaluate data integrity, handle missing values, and analyze the distribution of continuous variables.
+* Standardize data using `StandardScaler` to ensure the reliability of distance- and variance-based algorithms.
 
-### 2. Giảm chiều dữ liệu & Trực quan hóa (Dimensionality Reduction)
-* Ứng dụng **PCA** để chiếu và đánh giá cấu trúc tuyến tính tổng thể của không gian dữ liệu.
-* Áp dụng **t-SNE** (thiết kế chiến lược lấy mẫu tối ưu tài nguyên) để khai phá các mối quan hệ phi tuyến, bảo toàn cấu trúc lân cận cục bộ nhằm bóc tách rõ ràng ranh giới giữa giao dịch thật và giả trên không gian 2D.
+### 2. Dimensionality Reduction & Visualization
+* Apply **PCA** to project and evaluate the overall linear structure of the data space.
+* Implement **t-SNE** (with an optimized sampling strategy) to explore non-linear relationships and preserve local neighborhood structures, effectively visualizing the boundaries between valid and fraudulent transactions in a 2D space.
 
-### 3. Phân lớp có giám sát (Supervised Learning)
-* Triển khai 3 thuật toán tiêu biểu: **Naive Bayes**, **AdaBoost**, và **Random Forest**.
-* **Metric tối ưu:** Sử dụng **Macro F1-Score** thay vì Accuracy để tránh "bẫy" độ chính xác ảo trên dữ liệu mất cân bằng, buộc mô hình phải học cách phát hiện chính xác lớp thiểu số (gian lận).
-* Tinh chỉnh siêu tham số (Hyperparameter Tuning) với `GridSearchCV` và kiểm định chéo khách quan qua `Stratified 10-Fold Cross-Validation`.
+### 3. Supervised Learning
+* Deploy 3 representative algorithms: **Naive Bayes**, **AdaBoost**, and **Random Forest**.
+* **Optimization Metric:** Utilize the **Macro F1-Score** instead of Accuracy to avoid the "accuracy paradox" on imbalanced data, forcing the model to accurately detect the minority class (fraud).
+* Perform hyperparameter tuning using `GridSearchCV` and ensure objective evaluation via `Stratified 10-Fold Cross-Validation`.
 
-### 4. Gom cụm không giám sát (Unsupervised Learning)
-* Tiếp cận bài toán dưới góc độ "săn lùng mối đe dọa mù" (blind threat hunting) sử dụng **K-Means** và **DBSCAN**.
-* Vẽ đồ thị *k-distance* để xác định bán kính `eps` tối ưu cho thuật toán DBSCAN.
+### 4. Unsupervised Learning
+* Approach the problem from a "blind threat hunting" perspective using **K-Means** and **DBSCAN**.
+* Plot the *k-distance* graph to determine the optimal `eps` radius for the DBSCAN algorithm.
 
-## 🏆 Kết quả Nổi bật
-Kết quả kiểm tra chéo 10-Fold CV cho thấy mô hình **Random Forest** đạt hiệu năng vượt trội nhất trong việc kiểm soát cả tỷ lệ bỏ lọt và báo động giả:
+## 🏆 Key Results
+The 10-Fold CV results demonstrate that the **Random Forest** model achieves outstanding performance in controlling both the false negative (missed frauds) and false positive rates:
 
-| Mô hình | Macro F1-Score | Weighted F1 | Fraud F1-Score | Accuracy |
+| Model | Macro F1-Score | Weighted F1 | Fraud F1-Score | Accuracy |
 | :--- | :---: | :---: | :---: | :---: |
 | **Random Forest** | **0.8847** | **0.9992** | **0.7699** | 0.9992 |
 | **AdaBoost** | 0.8531 | 0.9990 | 0.7067 | 0.9991 |
 | **Naive Bayes** | 0.5510 | 0.9872 | 0.1133 | 0.9777 |
 
-## 🚀 Hướng dẫn Cài đặt & Khởi chạy
+## 🚀 Installation & Usage
 
-**Bước 1: Clone repository và kéo dữ liệu LFS**
+**Step 1: Clone the repository and pull LFS data**
 ```bash
 git clone [https://github.com/hien-cybers/Fraud-Anomaly-Detection.git](https://github.com/hien-cybers/Fraud-Anomaly-Detection.git)
 cd Fraud-Anomaly-Detection
