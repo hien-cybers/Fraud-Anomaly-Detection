@@ -52,3 +52,6 @@ The 10-Fold CV results demonstrate that the **Random Forest** model achieves out
 git clone [https://github.com/hien-cybers/Fraud-Anomaly-Detection.git](https://github.com/hien-cybers/Fraud-Anomaly-Detection.git)
 cd Fraud-Anomaly-Detection
 git lfs pull
+**Step 2: Set up the environment**
+```bash
+pip install -r requirements.txt
