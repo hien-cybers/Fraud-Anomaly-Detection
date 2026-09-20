@@ -52,6 +52,20 @@ The 10-Fold CV results demonstrate that the **Random Forest** model achieves out
 git clone [https://github.com/hien-cybers/Fraud-Anomaly-Detection.git](https://github.com/hien-cybers/Fraud-Anomaly-Detection.git)
 cd Fraud-Anomaly-Detection
 git lfs pull
-**Step 2: Set up the environment**
-```bash
+Step 2: Set up the environment
+
+Bash
 pip install -r requirements.txt
+Step 3: Run the project
+Open the Credit_Card_Fraud_Detection.ipynb file using Jupyter Notebook or Visual Studio Code. The dataset will be read directly by pandas from the downloaded creditcard.zip file without the need for manual extraction.
+
+👥 Development Team (Group 3)
+Nguyen Duc Hien (Project Management & Data Exploration/Preprocessing) - IT Student, UTH.
+
+Hoang Thi Ngoc Tram (Dimensionality Reduction: PCA/t-SNE & 2D Visualization).
+
+Tran Truong Thinh (Classification Pipeline & Hyperparameter Tuning).
+
+Nguyen Luong Vinh Chi (Unsupervised Clustering: K-Means, DBSCAN).
+
+Nguyen Anh Vu (10-Fold CV Evaluation & Final Report).
